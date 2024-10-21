@@ -1,6 +1,7 @@
 package com.example.diffutilsrecyclerview
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,9 @@ class Adapter :
             .into(holder.image)
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Item Clicked", Toast.LENGTH_SHORT).show()
+            Constant.userData = currentItem
+            val intent = Intent(holder.itemView.context, DetailedActivity::class.java)
+            holder.itemView.context.startActivity(intent)
         }
 
     }
