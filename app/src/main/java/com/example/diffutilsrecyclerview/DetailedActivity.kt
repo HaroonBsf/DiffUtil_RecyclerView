@@ -2,6 +2,7 @@ package com.example.diffutilsrecyclerview
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,7 +12,7 @@ import com.example.diffutilsrecyclerview.databinding.ActivityDetailedBinding
 
 class DetailedActivity : AppCompatActivity() {
 
-    val binding : ActivityDetailedBinding by lazy {
+    val binding: ActivityDetailedBinding by lazy {
         ActivityDetailedBinding.inflate(layoutInflater)
     }
 
@@ -26,8 +27,12 @@ class DetailedActivity : AppCompatActivity() {
             insets
         }
         val data = Constant.userData
+        if (data != null) {
+            Toast.makeText(this, "Response Successful", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Unexpected Error", Toast.LENGTH_SHORT).show()
+        }
         val url = data?.image
-
         binding.apply {
             back.setOnClickListener { finish() }
             Glide
@@ -48,7 +53,8 @@ class DetailedActivity : AppCompatActivity() {
             tvEyeColor.text = data?.eyeColor
             tvHairColor.text = data?.hair?.color
             tvHairType.text = data?.hair?.type
-            tvAddress.text = "${data?.address?.address}, ${data?.address?.city}, ${data?.address?.state}, ${data?.address?.country}"
+            tvAddress.text =
+                "${data?.address?.address}, ${data?.address?.city}, ${data?.address?.state}, ${data?.address?.country}"
         }
     }
 }
