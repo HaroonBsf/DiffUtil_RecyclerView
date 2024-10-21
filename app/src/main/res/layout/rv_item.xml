@@ -8,8 +8,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:src="@drawable/placeholder"
         android:scaleType="centerCrop"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Haroon Majeed"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="haroon.greyneon@gmail.com"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
