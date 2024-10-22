@@ -43,6 +43,7 @@ android {
 
 dependencies {
     val lifecycle_version = "2.8.6"
+    val room_version = "2.6.1"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -67,5 +68,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     //noinspection UseTomlInstead
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    //noinspection UseTomlInstead
+    implementation("androidx.room:room-runtime:$room_version")
+    //noinspection UseTomlInstead
+    implementation("androidx.room:room-ktx:$room_version")
+    //noinspection UseTomlInstead,KaptUsageInsteadOfKsp
+    kapt("androidx.room:room-compiler:$room_version")
 
 }
