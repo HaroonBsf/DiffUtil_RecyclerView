@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("kapt")
 }
 
 android {
@@ -35,11 +36,13 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        //noinspection DataBindingWithoutKapt
+        dataBinding = true
     }
 }
 
 dependencies {
-
+    val lifecycle_version = "2.8.6"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -56,5 +59,13 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
     //noinspection UseTomlInstead
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
+    //noinspection UseTomlInstead
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    //noinspection UseTomlInstead
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    //noinspection UseTomlInstead
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    //noinspection UseTomlInstead
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
 
 }

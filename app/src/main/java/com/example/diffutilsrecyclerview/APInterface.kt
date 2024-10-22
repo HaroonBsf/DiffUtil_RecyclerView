@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface APInterface {
 
     @GET("users")
-    fun getData(): Call<JsonResponse>
+    suspend fun getData(): JsonResponse
 
 }
