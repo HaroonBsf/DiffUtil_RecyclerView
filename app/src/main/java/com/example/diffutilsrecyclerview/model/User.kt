@@ -3,11 +3,8 @@ package com.example.diffutilsrecyclerview.model
 data class User(
     val address: Address,
     val age: Int,
-    val bank: Bank,
     val birthDate: String,
     val bloodGroup: String,
-    val company: Company,
-    val crypto: Crypto,
     val ein: String,
     val email: String,
     val eyeColor: String,
@@ -28,5 +25,5 @@ data class User(
     val university: String,
     val userAgent: String,
     val username: String,
-    val weight: Double
 )
+
