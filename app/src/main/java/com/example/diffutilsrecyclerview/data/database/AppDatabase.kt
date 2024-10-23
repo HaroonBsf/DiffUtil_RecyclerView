@@ -1,4 +1,4 @@
-package com.example.diffutilsrecyclerview.data
+package com.example.diffutilsrecyclerview.data.database
 
 import android.content.Context
 import androidx.room.Database
@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import com.example.diffutilsrecyclerview.model.Address
-import com.example.diffutilsrecyclerview.model.Hair
+import com.example.diffutilsrecyclerview.data.models.Address
+import com.example.diffutilsrecyclerview.data.models.Hair
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.example.diffutilsrecyclerview.model.LocalUser
+import com.example.diffutilsrecyclerview.data.models.LocalUser
 
 // Singleton Pattern
 @Database(entities = [LocalUser::class], version = 4, exportSchema = false)
@@ -41,14 +41,28 @@ abstract class AppDatabase : RoomDatabase() {
 
 class Converters {
     @TypeConverter
-    fun fromHair(hair: Hair): String = Gson().toJson(hair)
+    fun fromHair(hair: Hair): String {
+        val gson = Gson()
+        return gson.toJson(hair)
+    }
 
     @TypeConverter
-    fun toHair(hairString: String): Hair = Gson().fromJson(hairString, Hair::class.java)
+    fun toHair(hairString: String): Hair {
+        val gson = Gson()
+        val type = object : TypeToken<Hair>() {}.type
+        return gson.fromJson(hairString, type)
+    }
 
     @TypeConverter
-    fun fromAddress(address: Address): String = Gson().toJson(address)
+    fun fromAddress(address: Address): String {
+        val gson = Gson()
+        return gson.toJson(address)
+    }
 
     @TypeConverter
-    fun toAddress(addressString: String): Address = Gson().fromJson(addressString, Address::class.java)
+    fun toAddress(addressString: String): Address {
+        val gson = Gson()
+        val type = object : TypeToken<Address>() {}.type
+        return gson.fromJson(addressString, type)
+    }
 }

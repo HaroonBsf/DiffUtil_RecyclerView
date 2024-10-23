@@ -1,10 +1,11 @@
-package com.example.diffutilsrecyclerview.data
+package com.example.diffutilsrecyclerview.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.diffutilsrecyclerview.model.LocalUser
+import com.example.diffutilsrecyclerview.data.models.LocalUser
 
 @Dao
 interface UserDao  {
@@ -12,7 +13,7 @@ interface UserDao  {
     suspend fun insertAll(users: List<LocalUser>)
 
     @Query("SELECT * FROM user_table")
-    fun getAllUsers(): List<LocalUser>
+    fun getAllUsers(): LiveData<List<LocalUser>>
 
     @Query("DELETE FROM user_table")
     suspend fun deleteAll()

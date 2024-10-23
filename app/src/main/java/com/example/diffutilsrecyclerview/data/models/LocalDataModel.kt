@@ -1,9 +1,7 @@
-package com.example.diffutilsrecyclerview.model
+package com.example.diffutilsrecyclerview.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.diffutilsrecyclerview.data.Converters
 
 @Entity(tableName = "user_table")
 data class LocalUser(

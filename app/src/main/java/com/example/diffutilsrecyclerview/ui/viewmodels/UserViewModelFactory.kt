@@ -1,8 +1,8 @@
-package com.example.diffutilsrecyclerview.data
+package com.example.diffutilsrecyclerview.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.diffutilsrecyclerview.viewmodels.UserViewModel
+import com.example.diffutilsrecyclerview.repository.DataRepository
 
 class UserViewModelFactory(private val repository: DataRepository): ViewModelProvider.Factory {
 

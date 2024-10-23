@@ -9,14 +9,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diffutilsrecyclerview.R
-import com.example.diffutilsrecyclerview.adapters.Adapter
-import com.example.diffutilsrecyclerview.util.RetrofitClient
-import com.example.diffutilsrecyclerview.data.AppDatabase
-import com.example.diffutilsrecyclerview.data.DataRepository
-import com.example.diffutilsrecyclerview.viewmodels.UserViewModel
-import com.example.diffutilsrecyclerview.data.UserViewModelFactory
+import com.example.diffutilsrecyclerview.ui.adapters.Adapter
+import com.example.diffutilsrecyclerview.network.RetrofitClient
+import com.example.diffutilsrecyclerview.data.database.AppDatabase
+import com.example.diffutilsrecyclerview.repository.DataRepository
+import com.example.diffutilsrecyclerview.ui.viewmodels.UserViewModel
+import com.example.diffutilsrecyclerview.ui.viewmodels.UserViewModelFactory
 import com.example.diffutilsrecyclerview.databinding.ActivityMainBinding
-import com.example.diffutilsrecyclerview.model.users
+import com.example.diffutilsrecyclerview.data.models.users
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,26 +35,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         adapter = Adapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
 
         viewModel.getUserData()
+        observeRemoteUsers()
+        observeLocalUsers()
+    }
+
+    private fun observeRemoteUsers() {
         viewModel.userData.observe(this, Observer { response ->
             response?.let {
                 adapter.updateUsers(it.users)
-                binding.recyclerView.adapter = adapter
             }
         })
-
-        observeLocalUsers()
     }
 
     private fun observeLocalUsers() {
@@ -62,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             localUsers?.let {
                 val userList = it.users()
                 adapter.updateUsers(userList)
-                binding.recyclerView.adapter = adapter
             }
         })
     }

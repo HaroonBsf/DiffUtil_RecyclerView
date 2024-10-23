@@ -1,6 +1,5 @@
-package com.example.diffutilsrecyclerview.util
+package com.example.diffutilsrecyclerview.network
 
-import com.example.diffutilsrecyclerview.service.APInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,7 +11,7 @@ object RetrofitClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getData(): APInterface {
-        return retrofit.create(APInterface::class.java)
+    fun getData(): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }

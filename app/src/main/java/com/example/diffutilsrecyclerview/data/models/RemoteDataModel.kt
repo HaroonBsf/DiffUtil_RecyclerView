@@ -1,4 +1,52 @@
-package com.example.diffutilsrecyclerview.model
+package com.example.diffutilsrecyclerview.data.models
+
+data class Address(
+    val address: String,
+    val city: String,
+    val coordinates: Coordinates,
+    val country: String,
+    val postalCode: String,
+    val state: String,
+    val stateCode: String
+)
+
+data class Bank(
+    val cardExpire: String,
+    val cardNumber: String,
+    val cardType: String,
+    val currency: String,
+    val iban: String
+)
+
+data class Company(
+    val address: Address,
+    val department: String,
+    val name: String,
+    val title: String
+)
+
+data class Coordinates(
+    val lat: Double,
+    val lng: Double
+)
+
+data class Crypto(
+    val coin: String,
+    val network: String,
+    val wallet: String
+)
+
+data class Hair(
+    val color: String,
+    val type: String
+)
+
+data class JsonResponse(
+    val limit: Int,
+    val skip: Int,
+    val total: Int,
+    val users: List<User>
+)
 
 data class User(
     val address: Address,
