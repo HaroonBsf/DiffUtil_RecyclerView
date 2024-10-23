@@ -1,14 +1,10 @@
 package com.example.diffutilsrecyclerview.ui
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.ui.adapters.Adapter
 import com.example.diffutilsrecyclerview.network.RetrofitClient
 import com.example.diffutilsrecyclerview.data.database.AppDatabase
@@ -26,11 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val database by lazy { AppDatabase.getDatabase(this) }
     private val viewModel: UserViewModel by viewModels {
-        UserViewModelFactory(
-            DataRepository(
-                RetrofitClient.getData(), database.userDao()
-            )
-        )
+        UserViewModelFactory(DataRepository(RetrofitClient.getData(), database.userDao()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +30,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adapter = Adapter()
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
+        binding.apply {
+            recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+            recyclerView.adapter = adapter
+        }
 
         viewModel.getUserData()
         observeRemoteUsers()
