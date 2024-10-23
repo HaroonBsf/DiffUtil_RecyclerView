@@ -27,3 +27,32 @@ data class User(
     val username: String,
 )
 
+fun List<User>.localUsers(): List<LocalUser> {
+    return this.map { user ->
+        LocalUser(
+            id = user.id,
+            firstName = user.firstName,
+            lastName = user.lastName,
+            maidenName = user.maidenName,
+            age = user.age,
+            gender = user.gender,
+            phone = user.phone,
+            username = user.username,
+            birthDate = user.birthDate,
+            bloodGroup = user.bloodGroup,
+            eyeColor = user.eyeColor,
+            email = user.email,
+            image = user.image,
+            hair = Hair(user.hair.color, user.hair.type),
+            address = Address(
+                user.address.address,
+                user.address.city,
+                Coordinates(0.0, 0.0),
+                user.address.country,
+                "",
+                user.address.state,
+                ""
+            )
+        )
+    }
+}

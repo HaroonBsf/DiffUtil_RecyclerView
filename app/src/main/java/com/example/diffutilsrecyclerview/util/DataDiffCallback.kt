@@ -1,4 +1,4 @@
-package com.example.diffutilsrecyclerview
+package com.example.diffutilsrecyclerview.util
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.diffutilsrecyclerview.model.User

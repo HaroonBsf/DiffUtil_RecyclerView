@@ -1,10 +1,11 @@
-package com.example.diffutilsrecyclerview.data
+package com.example.diffutilsrecyclerview.viewmodels
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.diffutilsrecyclerview.data.DataRepository
 import com.example.diffutilsrecyclerview.model.JsonResponse
 import com.example.diffutilsrecyclerview.model.LocalUser
 import kotlinx.coroutines.launch

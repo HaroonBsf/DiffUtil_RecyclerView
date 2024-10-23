@@ -1,5 +1,6 @@
-package com.example.diffutilsrecyclerview
+package com.example.diffutilsrecyclerview.util
 
+import com.example.diffutilsrecyclerview.service.APInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,5 +15,4 @@ object RetrofitClient {
     fun getData(): APInterface {
         return retrofit.create(APInterface::class.java)
     }
-
 }

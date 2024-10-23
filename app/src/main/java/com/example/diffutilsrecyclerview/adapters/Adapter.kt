@@ -1,4 +1,4 @@
-package com.example.diffutilsrecyclerview
+package com.example.diffutilsrecyclerview.adapters
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,7 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.diffutilsrecyclerview.util.Constant
+import com.example.diffutilsrecyclerview.util.DataDiffCallback
+import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.model.User
+import com.example.diffutilsrecyclerview.ui.DetailedActivity
 import de.hdodenhof.circleimageview.CircleImageView
 
 class Adapter :
