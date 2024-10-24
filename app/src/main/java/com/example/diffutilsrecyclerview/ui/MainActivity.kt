@@ -6,44 +6,43 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diffutilsrecyclerview.ui.adapters.Adapter
-import com.example.diffutilsrecyclerview.network.RetrofitClient
-import com.example.diffutilsrecyclerview.data.database.AppDatabase
-import com.example.diffutilsrecyclerview.repository.DataRepository
 import com.example.diffutilsrecyclerview.ui.viewmodels.UserViewModel
-import com.example.diffutilsrecyclerview.ui.viewmodels.UserViewModelFactory
 import com.example.diffutilsrecyclerview.databinding.ActivityMainBinding
 import com.example.diffutilsrecyclerview.data.models.users
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter: Adapter
+    @Inject lateinit var adapter: Adapter
     val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-    private val database by lazy { AppDatabase.getDatabase(this) }
-    private val viewModel: UserViewModel by viewModels {
-        UserViewModelFactory(DataRepository(RetrofitClient.getData(), database.userDao()))
-    }
+    private val viewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        adapter = Adapter()
+        recyclerViewSetup()
+        observeRemoteUsers()
+        viewModel.getUserData()
+    }
+
+    private fun recyclerViewSetup() {
         binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
             recyclerView.adapter = adapter
         }
-
-        viewModel.getUserData()
-        observeRemoteUsers()
-        observeLocalUsers()
     }
 
     private fun observeRemoteUsers() {
         viewModel.userData.observe(this, Observer { response ->
-            response?.let {
-                adapter.updateUsers(it.users)
+            if (response != null){
+                adapter.updateUsers(response.users)
+            } else{
+               observeLocalUsers()
             }
         })
     }

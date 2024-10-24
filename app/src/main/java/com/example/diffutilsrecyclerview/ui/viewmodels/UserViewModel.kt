@@ -6,9 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.diffutilsrecyclerview.data.models.JsonResponse
 import com.example.diffutilsrecyclerview.repository.DataRepository
 import com.example.diffutilsrecyclerview.data.models.LocalUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserViewModel(private val repository: DataRepository) : ViewModel() {
+@HiltViewModel
+class UserViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
 
     val userData: LiveData<JsonResponse?> = repository.userData
     val localUserData: LiveData<List<LocalUser>> = repository.fetchUsersFromRoom()

@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("kapt")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -74,5 +76,11 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
     //noinspection UseTomlInstead,KaptUsageInsteadOfKsp
     kapt("androidx.room:room-compiler:$room_version")
-
+    //noinspection UseTomlInstead
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    //noinspection UseTomlInstead
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+}
+kapt {
+    correctErrorTypes = true
 }

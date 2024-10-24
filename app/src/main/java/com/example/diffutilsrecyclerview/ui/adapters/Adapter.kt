@@ -10,8 +10,9 @@ import com.example.diffutilsrecyclerview.util.DataDiffCallback
 import com.example.diffutilsrecyclerview.data.models.User
 import com.example.diffutilsrecyclerview.databinding.RvItemBinding
 import com.example.diffutilsrecyclerview.ui.DetailedActivity
+import javax.inject.Inject
 
-class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter @Inject constructor() : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
     private var userList = listOf<User>()
 
@@ -36,7 +37,7 @@ class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
         return userList.size
     }
 
-    class ViewHolder(val binding: RvItemBinding, ) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun updateUsers(newUserList: List<User>) {
         val diffCallback = DataDiffCallback(userList, newUserList)

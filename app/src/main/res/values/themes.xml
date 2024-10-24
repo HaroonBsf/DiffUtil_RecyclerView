@@ -4,6 +4,7 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">#EBE6E6</item>
+        <item name="android:navigationBarColor">#EBE6E6</item>
     </style>
 
     <style name="Theme.DiffUtilsRecyclerView" parent="Base.Theme.DiffUtilsRecyclerView" />

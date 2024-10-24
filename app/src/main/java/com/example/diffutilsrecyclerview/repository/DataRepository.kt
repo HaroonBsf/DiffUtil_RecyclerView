@@ -6,13 +6,16 @@ import com.example.diffutilsrecyclerview.data.database.UserDao
 import com.example.diffutilsrecyclerview.data.models.JsonResponse
 import com.example.diffutilsrecyclerview.data.models.LocalUser
 import com.example.diffutilsrecyclerview.data.models.localUsers
-import com.example.diffutilsrecyclerview.network.ApiService
+import com.example.diffutilsrecyclerview.common.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class DataRepository(private val apInterface: ApiService, private val userDao: UserDao) {
+/*class DataRepository @Inject constructor(private val apInterface: ApiService, private val appDatabase: AppDatabase) {
+    private val userDao = appDatabase.userDao()...*/
 
+class DataRepository @Inject constructor(private val apInterface: ApiService, private val userDao: UserDao) {
     private val _userData = MutableLiveData<JsonResponse?>()
     val userData: LiveData<JsonResponse?> get() = _userData
 
@@ -20,7 +23,7 @@ class DataRepository(private val apInterface: ApiService, private val userDao: U
         withContext(Dispatchers.IO) {
             try {
                 val response = apInterface.getData()
-                response?.let {
+                response.let {
                     val localUsers = it.users.localUsers()
                     userDao.deleteAll()
                     userDao.insertAll(localUsers)
@@ -31,7 +34,6 @@ class DataRepository(private val apInterface: ApiService, private val userDao: U
             }
         }
     }
-
 
     fun fetchUsersFromRoom(): LiveData<List<LocalUser>> {
         return userDao.getAllUsers()
