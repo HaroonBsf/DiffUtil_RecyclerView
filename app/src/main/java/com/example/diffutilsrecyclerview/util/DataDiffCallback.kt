@@ -1,7 +1,7 @@
 package com.example.diffutilsrecyclerview.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.diffutilsrecyclerview.data.models.User
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.User
 
 class DataDiffCallback(
     private val oldList: List<User>,

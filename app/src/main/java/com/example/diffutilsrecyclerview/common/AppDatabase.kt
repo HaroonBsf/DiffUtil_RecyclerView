@@ -5,11 +5,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.example.diffutilsrecyclerview.data.database.UserDao
-import com.example.diffutilsrecyclerview.data.models.Address
-import com.example.diffutilsrecyclerview.data.models.Hair
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Address
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Hair
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.example.diffutilsrecyclerview.data.models.LocalUser
+import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalUser
 
 @Database(entities = [LocalUser::class], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)

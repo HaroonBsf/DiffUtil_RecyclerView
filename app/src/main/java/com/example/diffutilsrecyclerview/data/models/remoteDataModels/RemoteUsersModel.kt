@@ -1,4 +1,6 @@
-package com.example.diffutilsrecyclerview.data.models
+package com.example.diffutilsrecyclerview.data.models.remoteDataModels
+
+import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalUser
 
 data class Address(
     val address: String,
@@ -41,7 +43,7 @@ data class Hair(
     val type: String
 )
 
-data class JsonResponse(
+data class RemoteUsersModel(
     val limit: Int,
     val skip: Int,
     val total: Int,

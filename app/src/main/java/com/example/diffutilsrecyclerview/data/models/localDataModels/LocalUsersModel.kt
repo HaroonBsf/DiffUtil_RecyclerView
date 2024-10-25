@@ -1,7 +1,11 @@
-package com.example.diffutilsrecyclerview.data.models
+package com.example.diffutilsrecyclerview.data.models.localDataModels
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Address
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Coordinates
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Hair
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.User
 
 @Entity(tableName = "user_table")
 data class LocalUser(

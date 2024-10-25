@@ -6,7 +6,7 @@
 
         <variable
             name="userData"
-            type="com.example.diffutilsrecyclerview.data.models.User" />
+            type="com.example.diffutilsrecyclerview.data.models.remoteDataModels.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toEndOf="@+id/circleImageView"
             app:layout_constraintTop_toTopOf="@+id/circleImageView">
 
-            <TextView
+            <TextView style="?android:textAppearanceMedium"
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
