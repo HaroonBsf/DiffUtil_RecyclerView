@@ -1,6 +1,8 @@
 package com.example.diffutilsrecyclerview.ui.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +20,18 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class UsersFragment : Fragment() {
 
-    @Inject lateinit var adapter: UsersAdapter
+    @Inject
+    lateinit var adapter: UsersAdapter
     private val viewModel: UserViewModel by viewModels()
 
-    var _binding : FragmentUsersBinding? = null
+    var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentUsersBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,9 +39,29 @@ class UsersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        filterUsers()
         recyclerViewSetup()
         observeRemoteUsers()
         viewModel.getUserData()
+    }
+
+    private fun filterUsers() {
+        binding.etSearchUsers.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterUsersNow(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun filterUsersNow(query: String) {
+        val filteredUsers = viewModel.userData.value?.users?.filter {
+            val fullName = "${it.firstName} ${it.lastName}"
+            fullName.contains(query, ignoreCase = true)
+        } ?: emptyList()
+        adapter.updateUsers(filteredUsers)
     }
 
     private fun recyclerViewSetup() {
@@ -46,9 +73,9 @@ class UsersFragment : Fragment() {
 
     private fun observeRemoteUsers() {
         viewModel.userData.observe(viewLifecycleOwner, Observer { response ->
-            if (response != null){
+            if (response != null) {
                 adapter.updateUsers(response.users)
-            } else{
+            } else {
                 observeLocalUsers()
             }
         })

@@ -1,52 +1,50 @@
 package com.example.diffutilsrecyclerview.ui.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diffutilsrecyclerview.util.Constant
-import com.example.diffutilsrecyclerview.data.models.remoteDataModels.User
-import com.example.diffutilsrecyclerview.databinding.RvUsersItemBinding
-import com.example.diffutilsrecyclerview.ui.UserDetailsActivity
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Recipe
+import com.example.diffutilsrecyclerview.databinding.RvRecipesItemsBinding
 import javax.inject.Inject
 
-class UsersAdapter @Inject constructor() : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
-    private var userList = listOf<User>()
+class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesAdapter.ViewHolder>() {
+
+    private var recipeList = listOf<Recipe>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RvUsersItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RvRecipesItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = userList[position]
-        holder.binding.userData = currentItem
+        val currentItem = recipeList[position]
+        holder.binding.recipeData = currentItem
         holder.binding.executePendingBindings()
 
-        holder.itemView.setOnClickListener {
+        /*holder.itemView.setOnClickListener {
             Constant.userData = currentItem
-            val intent = Intent(holder.itemView.context, UserDetailsActivity::class.java)
+            val intent = Intent(holder.itemView.context, DetailedActivity::class.java)
             holder.itemView.context.startActivity(intent)
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {
-        return userList.size
+        return recipeList.size
     }
 
-    class ViewHolder(val binding: RvUsersItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: RvRecipesItemsBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun updateUsers(newUserList: List<User>) {
-        val diffCallback = UsersDiffCallback(userList, newUserList)
+    fun updateRecipes(newUserList: List<Recipe>) {
+        val diffCallback = RecipesDiffCallback(recipeList, newUserList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        userList = newUserList
+        recipeList = newUserList
         diffResult.dispatchUpdatesTo(this)
     }
 }
 
-class UsersDiffCallback(private val oldList: List<User>, private val newList: List<User>): DiffUtil.Callback() {
+class RecipesDiffCallback(private val oldList: List<Recipe>, private val newList: List<Recipe>): DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size

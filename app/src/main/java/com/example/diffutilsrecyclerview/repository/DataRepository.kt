@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.diffutilsrecyclerview.data.database.UserDao
 import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalUser
 import com.example.diffutilsrecyclerview.common.ApiService
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteRecipeModel
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteUsersModel
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.localUsers
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,9 @@ class DataRepository @Inject constructor(private val apInterface: ApiService, pr
     private val _userData = MutableLiveData<RemoteUsersModel?>()
     val userData: LiveData<RemoteUsersModel?> get() = _userData
 
+    private val _recipeData = MutableLiveData<RemoteRecipeModel?>()
+    val recipeData: LiveData<RemoteRecipeModel?> get() = _recipeData
+
     suspend fun fetchUserData() {
         withContext(Dispatchers.IO) {
             try {
@@ -31,6 +35,17 @@ class DataRepository @Inject constructor(private val apInterface: ApiService, pr
                 }
             } catch (e: Exception) {
                 _userData.postValue(null)
+            }
+        }
+    }
+
+    suspend fun fetchRecipesData() {
+        withContext(Dispatchers.IO) {
+            try {
+                val response = apInterface.getRecipes()
+                    _recipeData.postValue(response)
+            } catch (e: Exception) {
+                _recipeData.postValue(null)
             }
         }
     }

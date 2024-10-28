@@ -20,3 +20,15 @@ fun intToString(textView: TextView, text: Int?) {
     val text = "${text.toString()} Years"
     textView.text = text
 }
+
+@BindingAdapter("recipeTime")
+fun recipeTime(textView: TextView, text: Int?) {
+    val text = "${text.toString()} mins"
+    textView.text = text
+}
+
+@BindingAdapter("doubleToString")
+fun doubleToString(textView: TextView, text: Double?) {
+    val text = text.toString()
+    textView.text = text
+}

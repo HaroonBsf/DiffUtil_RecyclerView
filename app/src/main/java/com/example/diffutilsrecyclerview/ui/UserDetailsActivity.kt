@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.diffutilsrecyclerview.util.Constant
 import com.example.diffutilsrecyclerview.databinding.ActivityDetailedBinding
 
-class DetailedActivity : AppCompatActivity() {
+class UserDetailsActivity : AppCompatActivity() {
 
     val binding: ActivityDetailedBinding by lazy {
         ActivityDetailedBinding.inflate(layoutInflater)

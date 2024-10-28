@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dummy_color">#D5CDCD</color>
+    <color name="app_theme">#EBE6E6</color>
+    <color name="item_color">#E9E3E3</color>
+    <color name="dark_dummy_color">#907A7A</color>
 </resources>

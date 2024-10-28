@@ -6,6 +6,8 @@ import com.example.diffutilsrecyclerview.common.AppDatabase
 import com.example.diffutilsrecyclerview.data.database.UserDao
 import com.example.diffutilsrecyclerview.common.ApiService
 import com.example.diffutilsrecyclerview.repository.DataRepository
+import com.example.diffutilsrecyclerview.ui.fragment.RecipesFragment
+import com.example.diffutilsrecyclerview.ui.fragment.UsersFragment
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,6 +57,16 @@ object AppModule {
     @Singleton
     fun provideDataRepository(apiService: ApiService, userDao: UserDao): DataRepository {
         return DataRepository(apiService, userDao)
+    }
+
+    @Provides
+    fun provideRecipesFragment(): RecipesFragment {
+        return RecipesFragment()
+    }
+
+    @Provides
+    fun provideUsersFragment(): UsersFragment {
+        return UsersFragment()
     }
 
     /*@Provides
