@@ -9,12 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.diffutilsrecyclerview.data.models.localDataModels.recipes
 import com.example.diffutilsrecyclerview.data.models.localDataModels.users
 import com.example.diffutilsrecyclerview.databinding.FragmentRecipesBinding
 import com.example.diffutilsrecyclerview.ui.adapters.RecipesAdapter
+import com.example.diffutilsrecyclerview.ui.adapters.TopRecipeAdapter
 import com.example.diffutilsrecyclerview.ui.viewmodels.RecipeViewModel
+import com.example.diffutilsrecyclerview.ui.viewmodels.TopRecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,7 +27,10 @@ class RecipesFragment : Fragment() {
 
     @Inject
     lateinit var adapter: RecipesAdapter
+    @Inject
+    lateinit var topAdapter: TopRecipeAdapter
     private val viewModel: RecipeViewModel by viewModels()
+    private val topViewModel: TopRecipeViewModel by viewModels()
 
     var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
@@ -39,6 +46,7 @@ class RecipesFragment : Fragment() {
         filterRecipes()
         recyclerViewSetup()
         observeRemoteRecipes()
+        topViewModel.getTopRecipeData()
         viewModel.getRecipeData()
     }
 
@@ -60,13 +68,21 @@ class RecipesFragment : Fragment() {
     }
 
     private fun observeRemoteRecipes() {
+        observeTopRecipes()
         viewModel.recipeData.observe(viewLifecycleOwner, Observer { response ->
             if (response != null) {
                 adapter.updateRecipes(response.recipes)
             } else {
                 observeLocalRecipes()
             }
+        })
+    }
 
+    private fun observeTopRecipes() {
+        topViewModel.topRecipeData.observe(viewLifecycleOwner, Observer { response ->
+            response?.let {
+                topAdapter.updateTopRecipes(it.results)
+            }
         })
     }
 
@@ -83,6 +99,10 @@ class RecipesFragment : Fragment() {
             rvRecipe.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             rvRecipe.setHasFixedSize(true)
             rvRecipe.adapter = adapter
+
+            rvHorizontalRecipe.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            rvHorizontalRecipe.setHasFixedSize(true)
+            rvHorizontalRecipe.adapter = topAdapter
         }
     }
 

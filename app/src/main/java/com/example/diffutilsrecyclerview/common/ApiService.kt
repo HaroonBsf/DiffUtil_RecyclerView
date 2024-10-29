@@ -1,8 +1,8 @@
 package com.example.diffutilsrecyclerview.common
 
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteRecipeModel
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteRecipeModelTwo
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteUsersModel
-import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
@@ -13,5 +13,5 @@ interface ApiService {
     suspend fun getRecipes(): RemoteRecipeModel
 
     @GET("recipes/list")
-    suspend fun getRecipes(): RemoteRecipeModel
+    suspend fun getTopRecipes(): RemoteRecipeModelTwo
 }

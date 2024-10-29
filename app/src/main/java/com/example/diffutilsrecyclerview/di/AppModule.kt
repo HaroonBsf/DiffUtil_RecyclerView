@@ -104,8 +104,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDataRepository(@ApiOne apiServiceOne: ApiService, appDatabase: AppDatabase): DataRepository {
-        return DataRepository(apiServiceOne, appDatabase)
+    fun provideDataRepository(
+        @ApiOne apiServiceOne: ApiService,
+        @ApiTwo apiServiceTwo: ApiService,
+        appDatabase: AppDatabase): DataRepository {
+        return DataRepository(apiServiceOne, apiServiceTwo, appDatabase)
     }
 
     @Provides

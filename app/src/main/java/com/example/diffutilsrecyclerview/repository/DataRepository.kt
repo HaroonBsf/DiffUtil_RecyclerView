@@ -8,6 +8,7 @@ import com.example.diffutilsrecyclerview.common.ApiService
 import com.example.diffutilsrecyclerview.common.AppDatabase
 import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalRecipeModel
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteRecipeModel
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteRecipeModelTwo
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteUsersModel
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.localRecipes
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.localUsers
@@ -20,6 +21,7 @@ import javax.inject.Inject
 
 class DataRepository @Inject constructor(
     @ApiOne private val apiServiceOne: ApiService,
+    @ApiTwo private val apiServiceTwo: ApiService,
     private val appDatabase: AppDatabase
 ) {
 
@@ -31,6 +33,9 @@ class DataRepository @Inject constructor(
 
     private val _recipeData = MutableLiveData<RemoteRecipeModel?>()
     val recipeData: LiveData<RemoteRecipeModel?> get() = _recipeData
+
+    private val _topRecipeData = MutableLiveData<RemoteRecipeModelTwo?>()
+    val topRecipeData: LiveData<RemoteRecipeModelTwo?> get() = _topRecipeData
 
     suspend fun fetchUserData() {
         withContext(Dispatchers.IO) {
@@ -64,6 +69,17 @@ class DataRepository @Inject constructor(
             } catch (e: Exception) {
                 _recipeData.postValue(null)
                 Log.e("DataRepository", "Error fetching recipes: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun fetchTopRecipeData() {
+        withContext(Dispatchers.IO) {
+            try {
+                val response = apiServiceTwo.getTopRecipes()
+                _topRecipeData.postValue(response)
+            } catch (e: Exception) {
+                _topRecipeData.postValue(null)
             }
         }
     }
