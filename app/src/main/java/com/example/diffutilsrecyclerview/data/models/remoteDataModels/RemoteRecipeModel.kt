@@ -1,5 +1,7 @@
 package com.example.diffutilsrecyclerview.data.models.remoteDataModels
 
+import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalRecipeModel
+
 data class RemoteRecipeModel(
     val limit: Int,
     val recipes: List<Recipe>,
@@ -25,3 +27,22 @@ data class Recipe(
     val tags: List<String>,
     val userId: Int
 )
+
+fun List<Recipe>.localRecipes(): List<LocalRecipeModel> {
+    return this.map { recipe ->
+        LocalRecipeModel(
+            id = recipe.id,
+            caloriesPerServing = recipe.caloriesPerServing,
+            cookTimeMinutes = recipe.cookTimeMinutes,
+            cuisine = recipe.cuisine,
+            image = recipe.image,
+            difficulty = recipe.difficulty,
+            ingredients = recipe.ingredients,
+            instructions = recipe.instructions,
+            name = recipe.name,
+            prepTimeMinutes = recipe.prepTimeMinutes,
+            rating = recipe.rating,
+            servings = recipe.servings
+        )
+    }
+}

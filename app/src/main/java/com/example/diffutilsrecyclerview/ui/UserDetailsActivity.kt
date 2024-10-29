@@ -2,8 +2,8 @@ package com.example.diffutilsrecyclerview.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.diffutilsrecyclerview.util.Constant
 import com.example.diffutilsrecyclerview.databinding.ActivityDetailedBinding
+import com.example.diffutilsrecyclerview.util.userData
 
 class UserDetailsActivity : AppCompatActivity() {
 
@@ -15,7 +15,7 @@ class UserDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val data = Constant.userData
+        val data = userData
         binding.userDetails = data
         binding.back.setOnClickListener { finish() }
     }

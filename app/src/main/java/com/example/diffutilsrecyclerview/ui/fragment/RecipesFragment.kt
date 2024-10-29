@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.diffutilsrecyclerview.data.models.localDataModels.recipes
+import com.example.diffutilsrecyclerview.data.models.localDataModels.users
 import com.example.diffutilsrecyclerview.databinding.FragmentRecipesBinding
 import com.example.diffutilsrecyclerview.ui.adapters.RecipesAdapter
 import com.example.diffutilsrecyclerview.ui.viewmodels.RecipeViewModel
@@ -33,6 +35,7 @@ class RecipesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         filterRecipes()
         recyclerViewSetup()
         observeRemoteRecipes()
@@ -58,8 +61,19 @@ class RecipesFragment : Fragment() {
 
     private fun observeRemoteRecipes() {
         viewModel.recipeData.observe(viewLifecycleOwner, Observer { response ->
-            response?.let {
-                adapter.updateRecipes(it.recipes)
+            if (response != null) {
+                adapter.updateRecipes(response.recipes)
+            } else {
+                observeLocalRecipes()
+            }
+
+        })
+    }
+
+    private fun observeLocalRecipes() {
+        viewModel.localRecipesData.observe(viewLifecycleOwner, Observer { localRecipes ->
+            localRecipes?.let {
+                adapter.updateRecipes(it.recipes())
             }
         })
     }

@@ -4,20 +4,23 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import com.example.diffutilsrecyclerview.data.database.RecipeDao
 import com.example.diffutilsrecyclerview.data.database.UserDao
+import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalRecipeModel
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Address
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Hair
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalUser
 
-@Database(entities = [LocalUser::class], version = 4, exportSchema = false)
-@TypeConverters(Converters::class)
+@Database(entities = [LocalUser::class, LocalRecipeModel::class], version = 5, exportSchema = false)
+@TypeConverters(UserConverters::class, RecipeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun recipeDao(): RecipeDao
 }
 
-class Converters {
+class UserConverters {
     @TypeConverter
     fun fromHair(hair: Hair): String {
         val gson = Gson()
@@ -42,5 +45,17 @@ class Converters {
         val gson = Gson()
         val type = object : TypeToken<Address>() {}.type
         return gson.fromJson(addressString, type)
+    }
+}
+
+class RecipeConverter {
+    @TypeConverter
+    fun fromIngredients(ingredients: List<String>): String {
+        return Gson().toJson(ingredients)
+    }
+
+    @TypeConverter
+    fun toIngredients(ingredientsString: String): List<String> {
+        return Gson().fromJson(ingredientsString, object : TypeToken<List<String>>() {}.type)
     }
 }

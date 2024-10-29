@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diffutilsrecyclerview.util.Constant
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.User
 import com.example.diffutilsrecyclerview.databinding.RvUsersItemBinding
 import com.example.diffutilsrecyclerview.ui.UserDetailsActivity
+import com.example.diffutilsrecyclerview.util.userData
 import javax.inject.Inject
 
 class UsersAdapter @Inject constructor() : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
@@ -26,7 +26,7 @@ class UsersAdapter @Inject constructor() : RecyclerView.Adapter<UsersAdapter.Vie
         holder.binding.executePendingBindings()
 
         holder.itemView.setOnClickListener {
-            Constant.userData = currentItem
+            userData = currentItem
             val intent = Intent(holder.itemView.context, UserDetailsActivity::class.java)
             holder.itemView.context.startActivity(intent)
         }

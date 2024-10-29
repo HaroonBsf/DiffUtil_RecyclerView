@@ -26,7 +26,7 @@ data class LocalUser(
     val address: Address
 )
 
-fun List<LocalUser>.users(): List<User>{
+fun List<LocalUser>.users(): List<User> {
     return this.map { localUser ->
         User(
             id = localUser.id,

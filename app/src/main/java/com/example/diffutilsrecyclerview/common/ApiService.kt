@@ -11,4 +11,7 @@ interface ApiService {
 
     @GET("recipes")
     suspend fun getRecipes(): RemoteRecipeModel
+
+    @GET("recipes/list")
+    suspend fun getRecipes(): RemoteRecipeModel
 }

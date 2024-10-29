@@ -27,6 +27,12 @@ fun recipeTime(textView: TextView, text: Int?) {
     textView.text = text
 }
 
+@BindingAdapter("setIntInText")
+fun setIntInText(textView: TextView, text: Int?) {
+    val text = text.toString()
+    textView.text = text
+}
+
 @BindingAdapter("doubleToString")
 fun doubleToString(textView: TextView, text: Double?) {
     val text = text.toString()

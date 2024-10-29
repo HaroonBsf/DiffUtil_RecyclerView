@@ -1,11 +1,14 @@
 package com.example.diffutilsrecyclerview.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Recipe
 import com.example.diffutilsrecyclerview.databinding.RvRecipesItemsBinding
+import com.example.diffutilsrecyclerview.ui.RecipeDetailsActivity
+import com.example.diffutilsrecyclerview.util.recipeData
 import javax.inject.Inject
 
 
@@ -23,11 +26,11 @@ class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesAdapter
         holder.binding.recipeData = currentItem
         holder.binding.executePendingBindings()
 
-        /*holder.itemView.setOnClickListener {
-            Constant.userData = currentItem
-            val intent = Intent(holder.itemView.context, DetailedActivity::class.java)
+        holder.itemView.setOnClickListener {
+            recipeData = currentItem
+            val intent = Intent(holder.itemView.context, RecipeDetailsActivity::class.java)
             holder.itemView.context.startActivity(intent)
-        }*/
+        }
     }
 
     override fun getItemCount(): Int {
