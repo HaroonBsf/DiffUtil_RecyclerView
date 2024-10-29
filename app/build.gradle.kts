@@ -81,6 +81,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51.1")
     //noinspection UseTomlInstead
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
 }
 kapt {
     correctErrorTypes = true

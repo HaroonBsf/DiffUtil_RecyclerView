@@ -6,4 +6,5 @@
     <color name="app_theme">#EBE6E6</color>
     <color name="item_color">#E9E3E3</color>
     <color name="dark_dummy_color">#907A7A</color>
+    <color name="my_hint">#B3A0A0</color>
 </resources>

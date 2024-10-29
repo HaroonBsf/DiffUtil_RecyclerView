@@ -79,9 +79,13 @@ class RecipesFragment : Fragment() {
     }
 
     private fun observeTopRecipes() {
+        binding.shimmerLayout.stopShimmer()
         topViewModel.topRecipeData.observe(viewLifecycleOwner, Observer { response ->
             response?.let {
                 topAdapter.updateTopRecipes(it.results)
+                binding.rvHorizontalRecipe.visibility = View.VISIBLE
+                binding.shimmerLayout.stopShimmer()
+                binding.shimmerLayout.visibility = View.GONE
             }
         })
     }

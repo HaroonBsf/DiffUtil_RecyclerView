@@ -72,9 +72,13 @@ class UsersFragment : Fragment() {
     }
 
     private fun observeRemoteUsers() {
+        binding.shimmerLayoutUsers.startShimmer()
         viewModel.userData.observe(viewLifecycleOwner, Observer { response ->
             if (response != null) {
                 adapter.updateUsers(response.users)
+                binding.rvUsers.visibility = View.VISIBLE
+                binding.shimmerLayoutUsers.stopShimmer()
+                binding.shimmerLayoutUsers.visibility = View.GONE
             } else {
                 observeLocalUsers()
             }
