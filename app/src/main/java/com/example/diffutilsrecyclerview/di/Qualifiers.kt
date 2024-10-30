@@ -9,3 +9,7 @@ annotation class ApiOne
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ApiTwo
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ApiThree

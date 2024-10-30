@@ -5,8 +5,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="popular_recipes">Popular Recipes</string>
     <string name="search_any_recipe">Search any recipe…</string>
+    <string name="search_any_image">Search any image…</string>
     <string name="users">Users</string>
     <string name="search_any_user">Search any user…</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
+    <string name="explore_images">Explore Images</string>
 </resources>

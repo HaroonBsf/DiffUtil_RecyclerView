@@ -3,6 +3,7 @@ package com.example.diffutilsrecyclerview.ui.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.diffutilsrecyclerview.ui.fragment.ExploreFragment
 import com.example.diffutilsrecyclerview.ui.fragment.RecipesFragment
 import com.example.diffutilsrecyclerview.ui.fragment.UsersFragment
 import javax.inject.Inject
@@ -12,7 +13,7 @@ class PagerAdapter @Inject constructor(activity: FragmentActivity) : FragmentSta
 //    @Inject lateinit var recipesFragment: RecipesFragment
 //    @Inject lateinit var usersFragment: UsersFragment
 
-    private val fragments = listOf(RecipesFragment(), UsersFragment())
+    private val fragments = listOf(RecipesFragment(), UsersFragment(), ExploreFragment())
 
     override fun getItemCount(): Int = fragments.size
 

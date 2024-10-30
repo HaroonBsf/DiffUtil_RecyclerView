@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             tab.text = when (position) {
                 0 -> "Recipes"
                 1 -> "Users"
+                2 -> "Explore"
                 else -> null
             }
         }.attach()

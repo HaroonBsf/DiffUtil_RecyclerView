@@ -9,10 +9,10 @@ import com.example.diffutilsrecyclerview.data.database.RecipeDao
 import com.example.diffutilsrecyclerview.repository.DataRepository
 import com.example.diffutilsrecyclerview.ui.fragment.RecipesFragment
 import com.example.diffutilsrecyclerview.ui.fragment.UsersFragment
-import com.example.diffutilsrecyclerview.util.API_HOST
-import com.example.diffutilsrecyclerview.util.API_KEY
-import com.example.diffutilsrecyclerview.util.BASE_URL_ONE
-import com.example.diffutilsrecyclerview.util.BASE_URL_TWO
+import com.example.diffutilsrecyclerview.util.API_HOST_CATEGORIES
+import com.example.diffutilsrecyclerview.util.API_KEY_CATEGORIES
+import com.example.diffutilsrecyclerview.util.BASE_URL
+import com.example.diffutilsrecyclerview.util.BASE_URL_CATEGORIES
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,8 +35,8 @@ object AppModule {
         val interceptor = Interceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
-                .header("x-rapidapi-key", API_KEY)
-                .header("x-rapidapi-host", API_HOST)
+                .header("x-rapidapi-key", API_KEY_CATEGORIES)
+                .header("x-rapidapi-host", API_HOST_CATEGORIES)
                 .build()
             chain.proceed(request)
         }
@@ -50,7 +50,7 @@ object AppModule {
     @ApiTwo
     fun provideRetrofitTwo(@ApiTwo okHttpClient: OkHttpClient): Retrofit{
         return Retrofit.Builder()
-            .baseUrl(BASE_URL_TWO)
+            .baseUrl(BASE_URL_CATEGORIES)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -68,7 +68,7 @@ object AppModule {
     @ApiOne
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL_ONE)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
