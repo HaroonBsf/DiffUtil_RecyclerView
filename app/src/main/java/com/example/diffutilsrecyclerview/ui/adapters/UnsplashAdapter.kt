@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diffutilsrecyclerview.data.models.remoteDataModels.ImageModel
-import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Urls
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto
 import com.example.diffutilsrecyclerview.databinding.RvExploreItemBinding
 import javax.inject.Inject
 
 class UnsplashAdapter @Inject constructor() : RecyclerView.Adapter<UnsplashAdapter.ViewHolder>() {
 
-    private var imagesList = listOf<ImageModel?>()
+    private var imagesList = listOf<UnsplashPhoto>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = RvExploreItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,15 +29,16 @@ class UnsplashAdapter @Inject constructor() : RecyclerView.Adapter<UnsplashAdapt
 
     class ViewHolder(val binding: RvExploreItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun updateImages(newUserList: List<ImageModel?>) {
-        val diffCallback = ImagesDiffCallback(imagesList, newUserList)
+    fun updateImages(newImageList: List<UnsplashPhoto>?) {
+        val finalList = newImageList ?: emptyList()
+        val diffCallback = ImagesDiffCallback(imagesList, finalList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        imagesList = newUserList
+        imagesList = finalList
         diffResult.dispatchUpdatesTo(this)
     }
 }
 
-class ImagesDiffCallback(private val oldList: List<ImageModel?>, private val newList: List<ImageModel?>): DiffUtil.Callback() {
+class ImagesDiffCallback(private val oldList: List<UnsplashPhoto>, private val newList: List<UnsplashPhoto>): DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size

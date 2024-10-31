@@ -6,13 +6,13 @@
     <data>
 <variable
     name="unsplashImage"
-    type="com.example.diffutilsrecyclerview.data.models.remoteDataModels.ImageModel" />
+    type="com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"

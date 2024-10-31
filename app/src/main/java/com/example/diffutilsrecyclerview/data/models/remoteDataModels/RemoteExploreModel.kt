@@ -1,12 +1,14 @@
 package com.example.diffutilsrecyclerview.data.models.remoteDataModels
 
-class RemoteExploreModel : ArrayList<ImageModel>()
-
-data class ImageModel(
-    val urls: Urls
+class RemoteExploreModel(
+    val results: List<UnsplashPhoto>
 )
 
-data class Urls(
+data class UnsplashPhoto(
+    val urls: UnsplashPhotoUrls
+)
+
+data class UnsplashPhotoUrls(
     val full: String,
     val raw: String,
     val regular: String,
