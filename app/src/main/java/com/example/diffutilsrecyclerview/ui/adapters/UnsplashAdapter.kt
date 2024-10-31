@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class UnsplashAdapter @Inject constructor() : RecyclerView.Adapter<UnsplashAdapter.ViewHolder>() {
 
-    private var imagesList = listOf<UnsplashPhoto>()
+    private var imagesList = listOf<UnsplashPhoto?>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = RvExploreItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -29,7 +29,7 @@ class UnsplashAdapter @Inject constructor() : RecyclerView.Adapter<UnsplashAdapt
 
     class ViewHolder(val binding: RvExploreItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun updateImages(newImageList: List<UnsplashPhoto>?) {
+    fun updateImages(newImageList: List<UnsplashPhoto?>) {
         val finalList = newImageList ?: emptyList()
         val diffCallback = ImagesDiffCallback(imagesList, finalList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -38,7 +38,7 @@ class UnsplashAdapter @Inject constructor() : RecyclerView.Adapter<UnsplashAdapt
     }
 }
 
-class ImagesDiffCallback(private val oldList: List<UnsplashPhoto>, private val newList: List<UnsplashPhoto>): DiffUtil.Callback() {
+class ImagesDiffCallback(private val oldList: List<UnsplashPhoto?>, private val newList: List<UnsplashPhoto?>): DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size

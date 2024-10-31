@@ -18,26 +18,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/etSearchImages"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/search_edit_bg"
-        android:drawableStart="@drawable/baseline_search_24"
-        android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="@string/search_any_image"
         android:inputType="text"
-        android:paddingHorizontal="12dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/dark_dummy_color"
-        android:textCursorDrawable="@drawable/cursor_color"
-        android:textSize="16sp"
+        app:queryBackground="@null"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:queryHint="@string/search_any_image"
+        app:searchIcon="@drawable/baseline_search_24"
+        tools:ignore="RtlSymmetry"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExploreImages"

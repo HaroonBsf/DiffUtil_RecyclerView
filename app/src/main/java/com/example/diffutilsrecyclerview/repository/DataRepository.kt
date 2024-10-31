@@ -7,21 +7,26 @@ import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalUser
 import com.example.diffutilsrecyclerview.common.ApiService
 import com.example.diffutilsrecyclerview.common.AppDatabase
 import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalRecipeModel
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteExploreModel
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteRecipeModel
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteRecipeModelTwo
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteUsersModel
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.localRecipes
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.localUsers
 import com.example.diffutilsrecyclerview.di.ApiOne
+import com.example.diffutilsrecyclerview.di.ApiThree
 import com.example.diffutilsrecyclerview.di.ApiTwo
+import com.example.diffutilsrecyclerview.util.API_KEY_UNSPLASH
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import javax.inject.Inject
+import kotlin.Exception
 
 class DataRepository @Inject constructor(
     @ApiOne private val apiServiceOne: ApiService,
     @ApiTwo private val apiServiceTwo: ApiService,
+    @ApiThree private val apiServiceThree: ApiService,
     private val appDatabase: AppDatabase
 ) {
 
@@ -36,6 +41,12 @@ class DataRepository @Inject constructor(
 
     private val _topRecipeData = MutableLiveData<RemoteRecipeModelTwo?>()
     val topRecipeData: LiveData<RemoteRecipeModelTwo?> get() = _topRecipeData
+
+    private val _unsplashImagesData = MutableLiveData<List<UnsplashPhoto?>>()
+    val unsplashImagesData: LiveData<List<UnsplashPhoto?>> get() = _unsplashImagesData
+
+    private val _unsplashSearchData = MutableLiveData<RemoteExploreModel?>()
+    val unsplashSearchData: LiveData<RemoteExploreModel?> get() = _unsplashSearchData
 
     suspend fun fetchUserData() {
         withContext(Dispatchers.IO) {
@@ -69,6 +80,32 @@ class DataRepository @Inject constructor(
             } catch (e: Exception) {
                 _recipeData.postValue(null)
                 Log.e("DataRepository", "Error fetching recipes: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun fetchUnsplashData(page: Int, per_page: Int) {
+        withContext(Dispatchers.IO) {
+            try {
+                val response = apiServiceThree.getUnsplashImages(API_KEY_UNSPLASH, page, per_page)
+                response.let {
+                    _unsplashImagesData.postValue(response)
+                }
+            } catch (e: Exception) {
+                _unsplashImagesData.postValue(emptyList())
+                Log.e("DataRepository", "Error fetching unsplash images: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun fetchUnsplashSearchData(query: String) {
+        withContext(Dispatchers.IO) {
+            try {
+                val response = apiServiceThree.getUnsplashSearchImages(API_KEY_UNSPLASH, query)
+                _unsplashSearchData.postValue(response)
+            } catch (e: Exception) {
+                _unsplashSearchData.postValue(null)
+                Log.e("DataRepository", "Error fetching unsplash search images: ${e.message}")
             }
         }
     }

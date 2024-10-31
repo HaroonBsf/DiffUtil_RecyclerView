@@ -13,6 +13,7 @@ import com.example.diffutilsrecyclerview.util.API_HOST_CATEGORIES
 import com.example.diffutilsrecyclerview.util.API_KEY_CATEGORIES
 import com.example.diffutilsrecyclerview.util.BASE_URL
 import com.example.diffutilsrecyclerview.util.BASE_URL_CATEGORIES
+import com.example.diffutilsrecyclerview.util.BASE_URL_UNSPLASH
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +28,23 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    @ApiThree
+    fun provideRetrofitUnsplash(): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL_UNSPLASH)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @ApiThree
+    fun provideApiServiceThree(@ApiThree retrofit: Retrofit): ApiService{
+        return retrofit.create(ApiService::class.java)
+    }
 
     @Provides
     @Singleton
@@ -107,8 +125,9 @@ object AppModule {
     fun provideDataRepository(
         @ApiOne apiServiceOne: ApiService,
         @ApiTwo apiServiceTwo: ApiService,
+        @ApiThree apiServiceThree: ApiService,
         appDatabase: AppDatabase): DataRepository {
-        return DataRepository(apiServiceOne, apiServiceTwo, appDatabase)
+        return DataRepository(apiServiceOne, apiServiceTwo, apiServiceThree, appDatabase)
     }
 
     @Provides

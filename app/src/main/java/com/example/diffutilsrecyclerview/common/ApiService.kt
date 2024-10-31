@@ -20,15 +20,15 @@ interface ApiService {
     suspend fun getTopRecipes(): RemoteRecipeModelTwo
 
     @GET("photos")
-    fun getUnsplashImages(
+    suspend fun getUnsplashImages(
         @Query("client_id") client_id: String,
         @Query("page") page: Int,
         @Query("per_page") per_page: Int
-    ): Call<List<UnsplashPhoto>>
+    ): List<UnsplashPhoto>
 
     @GET("search/photos")
-    fun getUnsplashSearchImages(
+    suspend fun getUnsplashSearchImages(
         @Query("client_id") client_id: String,
         @Query("query") query: String
-    ): Call<RemoteExploreModel>
+    ): RemoteExploreModel
 }
