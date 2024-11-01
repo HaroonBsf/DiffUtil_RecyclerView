@@ -3,6 +3,7 @@ package com.example.diffutilsrecyclerview.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
 import com.example.diffutilsrecyclerview.repository.DataRepository
 import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalUser
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteUsersModel
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
+@ExperimentalPagingApi
 class UserViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
 
     val userData: LiveData<RemoteUsersModel?> = repository.userData

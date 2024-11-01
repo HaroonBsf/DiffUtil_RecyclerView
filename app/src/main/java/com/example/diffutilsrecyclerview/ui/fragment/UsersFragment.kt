@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.fragment.app.viewModels
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diffutilsrecyclerview.data.models.localDataModels.users
 import com.example.diffutilsrecyclerview.databinding.FragmentUsersBinding
@@ -18,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@ExperimentalPagingApi
 class UsersFragment : Fragment() {
 
     @Inject

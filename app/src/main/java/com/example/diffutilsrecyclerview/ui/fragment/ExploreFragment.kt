@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.diffutilsrecyclerview.databinding.FragmentExploreBinding
+import com.example.diffutilsrecyclerview.ui.adapters.PagingLoaderAdapter
 import com.example.diffutilsrecyclerview.ui.adapters.UnsplashPagingAdapter
 import com.example.diffutilsrecyclerview.ui.viewmodels.UnsplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 @AndroidEntryPoint
 class ExploreFragment : Fragment() {
 
@@ -57,8 +60,12 @@ class ExploreFragment : Fragment() {
     }
 
     private fun observeUnsplashImages() {
+        binding.shimmerLayoutUnsplash.startShimmer()
         viewModel.getUnsplashImages().observe(viewLifecycleOwner, Observer { pagingData ->
             adapter.submitData(lifecycle, pagingData)
+            binding.rvExploreImages.visibility = View.VISIBLE
+            binding.shimmerLayoutUnsplash.stopShimmer()
+            binding.shimmerLayoutUnsplash.visibility = View.GONE
         })
     }
 
@@ -69,9 +76,11 @@ class ExploreFragment : Fragment() {
     }
 
     private fun rvSetup() {
+        val loaderAdapter = PagingLoaderAdapter()
         binding.rvExploreImages.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.rvExploreImages.setHasFixedSize(true)
-        binding.rvExploreImages.adapter = adapter
+        binding.rvExploreImages.itemAnimator = null
+        binding.rvExploreImages.adapter = adapter.withLoadStateFooter(loaderAdapter)
     }
 
     override fun onDestroyView() {

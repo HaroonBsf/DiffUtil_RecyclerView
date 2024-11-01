@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diffutilsrecyclerview.data.models.localDataModels.users
 import com.example.diffutilsrecyclerview.ui.viewmodels.UserViewModel
@@ -19,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@ExperimentalPagingApi
 class MainActivity : AppCompatActivity() {
 
     @Inject

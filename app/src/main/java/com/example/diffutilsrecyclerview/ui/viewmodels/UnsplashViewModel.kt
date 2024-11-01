@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto
@@ -13,6 +14,7 @@ import com.example.diffutilsrecyclerview.util.API_KEY_UNSPLASH
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 @HiltViewModel
 class UnsplashViewModel @Inject constructor(val dataRepository: DataRepository) : ViewModel() {
 
@@ -25,7 +27,7 @@ class UnsplashViewModel @Inject constructor(val dataRepository: DataRepository) 
     }
 
     fun getUnsplashImages(): LiveData<PagingData<UnsplashPhoto>> {
-        return dataRepository.fetchUnsplashData(API_KEY).cachedIn(viewModelScope)
+        return dataRepository.fetchUnsplashData().cachedIn(viewModelScope)
     }
 
 }

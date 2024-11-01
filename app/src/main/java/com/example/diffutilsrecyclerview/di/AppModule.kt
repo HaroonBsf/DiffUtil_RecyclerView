@@ -1,11 +1,14 @@
 package com.example.diffutilsrecyclerview.di
 
 import android.content.Context
+import androidx.paging.ExperimentalPagingApi
 import androidx.room.Room
 import com.example.diffutilsrecyclerview.common.AppDatabase
 import com.example.diffutilsrecyclerview.data.database.UserDao
 import com.example.diffutilsrecyclerview.common.ApiService
 import com.example.diffutilsrecyclerview.data.database.RecipeDao
+import com.example.diffutilsrecyclerview.data.database.UnsplashDao
+import com.example.diffutilsrecyclerview.data.database.UnsplashRemoteKeysDao
 import com.example.diffutilsrecyclerview.repository.DataRepository
 import com.example.diffutilsrecyclerview.ui.fragment.RecipesFragment
 import com.example.diffutilsrecyclerview.ui.fragment.UsersFragment
@@ -121,7 +124,18 @@ object AppModule {
     }
 
     @Provides
+    fun provideUnsplashDao(database: AppDatabase): UnsplashDao {
+        return database.unsplashDao()
+    }
+
+    @Provides
+    fun provideUnsplashRemoteKeysDao(database: AppDatabase): UnsplashRemoteKeysDao {
+        return database.unsplashRemoteKeysDao()
+    }
+
+    @Provides
     @Singleton
+    @ExperimentalPagingApi
     fun provideDataRepository(
         @ApiOne apiServiceOne: ApiService,
         @ApiTwo apiServiceTwo: ApiService,
@@ -131,11 +145,13 @@ object AppModule {
     }
 
     @Provides
+    @ExperimentalPagingApi
     fun provideRecipesFragment(): RecipesFragment {
         return RecipesFragment()
     }
 
     @Provides
+    @ExperimentalPagingApi
     fun provideUsersFragment(): UsersFragment {
         return UsersFragment()
     }
