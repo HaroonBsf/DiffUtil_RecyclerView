@@ -44,8 +44,6 @@ android {
 }
 
 dependencies {
-    val lifecycle_version = "2.8.6"
-    val room_version = "2.6.1"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -55,32 +53,30 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    //noinspection UseTomlInstead
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-    //noinspection UseTomlInstead
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    //noinspection UseTomlInstead
+
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
-    //noinspection UseTomlInstead
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
-    //noinspection UseTomlInstead
+
+    val lifecycle_version = "2.8.6"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    //noinspection UseTomlInstead
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    //noinspection UseTomlInstead
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
-    //noinspection UseTomlInstead
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
-    //noinspection UseTomlInstead
+
+    val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
-    //noinspection UseTomlInstead
     implementation("androidx.room:room-ktx:$room_version")
-    //noinspection UseTomlInstead,KaptUsageInsteadOfKsp
     kapt("androidx.room:room-compiler:$room_version")
-    //noinspection UseTomlInstead
+
     implementation("com.google.dagger:hilt-android:2.51.1")
-    //noinspection UseTomlInstead
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+
+    val paging_version = "3.3.2"
+    implementation("androidx.paging:paging-runtime:$paging_version")
+
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
 }
 kapt {

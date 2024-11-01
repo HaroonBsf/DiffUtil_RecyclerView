@@ -3,6 +3,10 @@ package com.example.diffutilsrecyclerview.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.diffutilsrecyclerview.data.models.localDataModels.LocalUser
 import com.example.diffutilsrecyclerview.common.ApiService
 import com.example.diffutilsrecyclerview.common.AppDatabase
@@ -17,11 +21,15 @@ import com.example.diffutilsrecyclerview.data.models.remoteDataModels.localUsers
 import com.example.diffutilsrecyclerview.di.ApiOne
 import com.example.diffutilsrecyclerview.di.ApiThree
 import com.example.diffutilsrecyclerview.di.ApiTwo
+import com.example.diffutilsrecyclerview.paging.UnsplashPagingSource
+import com.example.diffutilsrecyclerview.paging.UnsplashSearchPagingSource
 import com.example.diffutilsrecyclerview.util.API_KEY_UNSPLASH
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.Exception
+import kotlin.math.max
 
 class DataRepository @Inject constructor(
     @ApiOne private val apiServiceOne: ApiService,
@@ -42,11 +50,27 @@ class DataRepository @Inject constructor(
     private val _topRecipeData = MutableLiveData<RemoteRecipeModelTwo?>()
     val topRecipeData: LiveData<RemoteRecipeModelTwo?> get() = _topRecipeData
 
-    private val _unsplashImagesData = MutableLiveData<List<UnsplashPhoto?>>()
-    val unsplashImagesData: LiveData<List<UnsplashPhoto?>> get() = _unsplashImagesData
+    fun fetchUnsplashData(clientId: String): LiveData<PagingData<UnsplashPhoto>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                maxSize = 100,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { UnsplashPagingSource(apiServiceThree, clientId) }
+        ).liveData
+    }
 
-    private val _unsplashSearchData = MutableLiveData<RemoteExploreModel?>()
-    val unsplashSearchData: LiveData<RemoteExploreModel?> get() = _unsplashSearchData
+    fun fetchUnsplashSearchImages(clientId: String, query: String): LiveData<PagingData<UnsplashPhoto>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                maxSize = 100,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { UnsplashSearchPagingSource(apiServiceThree, clientId, query) }
+        ).liveData
+    }
 
     suspend fun fetchUserData() {
         withContext(Dispatchers.IO) {
@@ -80,32 +104,6 @@ class DataRepository @Inject constructor(
             } catch (e: Exception) {
                 _recipeData.postValue(null)
                 Log.e("DataRepository", "Error fetching recipes: ${e.message}")
-            }
-        }
-    }
-
-    suspend fun fetchUnsplashData(page: Int, per_page: Int) {
-        withContext(Dispatchers.IO) {
-            try {
-                val response = apiServiceThree.getUnsplashImages(API_KEY_UNSPLASH, page, per_page)
-                response.let {
-                    _unsplashImagesData.postValue(response)
-                }
-            } catch (e: Exception) {
-                _unsplashImagesData.postValue(emptyList())
-                Log.e("DataRepository", "Error fetching unsplash images: ${e.message}")
-            }
-        }
-    }
-
-    suspend fun fetchUnsplashSearchData(query: String) {
-        withContext(Dispatchers.IO) {
-            try {
-                val response = apiServiceThree.getUnsplashSearchImages(API_KEY_UNSPLASH, query)
-                _unsplashSearchData.postValue(response)
-            } catch (e: Exception) {
-                _unsplashSearchData.postValue(null)
-                Log.e("DataRepository", "Error fetching unsplash search images: ${e.message}")
             }
         }
     }

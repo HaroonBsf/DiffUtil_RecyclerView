@@ -1,30 +1,31 @@
 package com.example.diffutilsrecyclerview.ui.viewmodels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import com.example.diffutilsrecyclerview.data.models.remoteDataModels.RemoteExploreModel
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto
 import com.example.diffutilsrecyclerview.repository.DataRepository
+import com.example.diffutilsrecyclerview.util.API_KEY_UNSPLASH
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UnsplashViewModel @Inject constructor(val dataRepository: DataRepository) : ViewModel() {
 
-    val unsplashImagesData: LiveData<List<UnsplashPhoto?>> = dataRepository.unsplashImagesData
-    val unsplashSearchData: LiveData<RemoteExploreModel?> = dataRepository.unsplashSearchData
+    private val API_KEY = API_KEY_UNSPLASH
+    private val _searchResults = MutableLiveData<LiveData<PagingData<UnsplashPhoto>>>()
+    val searchResults: LiveData<PagingData<UnsplashPhoto>> get() = _searchResults.switchMap { it }
 
-    fun getUnsplashImagesData(page: Int, per_page: Int) {
-        viewModelScope.launch {
-            dataRepository.fetchUnsplashData(page, per_page)
-        }
+    fun searchUnsplashImages(query: String) {
+        _searchResults.value = dataRepository.fetchUnsplashSearchImages(API_KEY, query)
     }
 
-    fun getUnsplashSearchData(query: String){
-        viewModelScope.launch {
-            dataRepository.fetchUnsplashSearchData(query)
-        }
+    fun getUnsplashImages(): LiveData<PagingData<UnsplashPhoto>> {
+        return dataRepository.fetchUnsplashData(API_KEY).cachedIn(viewModelScope)
     }
+
 }

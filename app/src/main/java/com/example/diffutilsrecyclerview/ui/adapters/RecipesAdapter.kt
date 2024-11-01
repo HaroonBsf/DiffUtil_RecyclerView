@@ -40,9 +40,10 @@ class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesAdapter
     class ViewHolder(val binding: RvRecipesItemsBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun updateRecipes(newUserList: List<Recipe>) {
+        val finalList = newUserList ?: emptyList()
         val diffCallback = RecipesDiffCallback(recipeList, newUserList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        recipeList = newUserList
+        recipeList = finalList
         diffResult.dispatchUpdatesTo(this)
     }
 }
