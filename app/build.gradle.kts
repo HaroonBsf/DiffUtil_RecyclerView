@@ -79,6 +79,7 @@ dependencies {
     implementation("androidx.paging:paging-runtime:$paging_version")
 
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
+    implementation ("com.github.chrisbanes:PhotoView:2.0.0")
 }
 kapt {
     correctErrorTypes = true

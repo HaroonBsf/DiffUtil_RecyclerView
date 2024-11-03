@@ -22,12 +22,17 @@ import javax.inject.Inject
 class ExploreFragment : Fragment() {
 
     private val viewModel: UnsplashViewModel by viewModels()
-    @Inject lateinit var adapter: UnsplashPagingAdapter
+    @Inject
+    lateinit var adapter: UnsplashPagingAdapter
 
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,19 +46,21 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupSearchView() {
-        binding.etSearchImages.setOnQueryTextListener(object : OnQueryTextListener{
+        binding.etSearchImages.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     if (it.isNotEmpty()) {
                         viewModel.searchUnsplashImages(it)
-                        adapter.refresh()
                     }
                 }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.isNullOrEmpty()) viewModel.searchUnsplashImages("")
+                if (newText.isNullOrEmpty()) {
+                    viewModel.searchUnsplashImages("")
+                    adapter.refresh()
+                }
                 return false
             }
         })

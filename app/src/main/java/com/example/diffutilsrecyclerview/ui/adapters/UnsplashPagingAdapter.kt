@@ -1,5 +1,6 @@
 package com.example.diffutilsrecyclerview.ui.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto
 import com.example.diffutilsrecyclerview.databinding.RvExploreItemBinding
+import com.example.diffutilsrecyclerview.ui.FullImage
+import com.example.diffutilsrecyclerview.util.imageUrl
 import javax.inject.Inject
 
 class UnsplashPagingAdapter @Inject constructor() :
@@ -20,8 +23,15 @@ class UnsplashPagingAdapter @Inject constructor() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.binding.unsplashImage = currentItem
-        holder.binding.executePendingBindings()
+        holder.binding.apply {
+            val context = root.context
+            unsplashImage = currentItem
+            executePendingBindings()
+            root.setOnClickListener {
+                context.startActivity(Intent( context, FullImage::class.java))
+                imageUrl = currentItem
+            }
+        }
     }
 
     class ViewHolder(val binding: RvExploreItemBinding) : RecyclerView.ViewHolder(binding.root)

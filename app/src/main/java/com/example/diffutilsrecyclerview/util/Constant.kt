@@ -1,10 +1,12 @@
 package com.example.diffutilsrecyclerview.util
 
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Recipe
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.User
 
 var userData: User? = null
 var recipeData: Recipe? = null
+var imageUrl: UnsplashPhoto? = null
 
 const val BASE_URL = "https://dummyjson.com/"
 const val BASE_URL_CATEGORIES = "https://tasty.p.rapidapi.com/"
