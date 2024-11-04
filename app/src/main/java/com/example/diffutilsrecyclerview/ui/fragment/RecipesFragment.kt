@@ -20,6 +20,7 @@ import com.example.diffutilsrecyclerview.ui.adapters.RecipesAdapter
 import com.example.diffutilsrecyclerview.ui.adapters.TopRecipeAdapter
 import com.example.diffutilsrecyclerview.ui.viewmodels.RecipeViewModel
 import com.example.diffutilsrecyclerview.ui.viewmodels.TopRecipeViewModel
+import com.facebook.shimmer.Shimmer
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -81,7 +82,16 @@ class RecipesFragment : Fragment() {
     }
 
     private fun observeTopRecipes() {
-        binding.shimmerLayout.stopShimmer()
+        val shimmer = Shimmer.AlphaHighlightBuilder()
+            .setBaseAlpha(0.3f)
+            .setHighlightAlpha(0.1f)
+            .setDuration(2000)
+            .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+            .setTilt(10f)
+            .build()
+
+        binding.shimmerLayout.setShimmer(shimmer)
+        binding.shimmerLayout.startShimmer()
         topViewModel.topRecipeData.observe(viewLifecycleOwner, Observer { response ->
             response?.let {
                 topAdapter.updateTopRecipes(it.results)

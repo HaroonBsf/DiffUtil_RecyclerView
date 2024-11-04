@@ -22,17 +22,11 @@ import javax.inject.Inject
 class ExploreFragment : Fragment() {
 
     private val viewModel: UnsplashViewModel by viewModels()
-    @Inject
-    lateinit var adapter: UnsplashPagingAdapter
-
+    @Inject lateinit var adapter: UnsplashPagingAdapter
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
         return binding.root
     }
