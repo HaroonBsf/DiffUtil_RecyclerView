@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:fillViewport="true"
-        tools:context=".ui.UserDetailsActivity">
+        tools:context=".ui.fragment.UserDetailFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -164,9 +164,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        app:intToString="@{userDetails.age}"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:intToString="@{userDetails.age}" />
 
                 </LinearLayout>
 
@@ -548,12 +548,12 @@
                 android:id="@+id/fbAddRecipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_add_24"
                 android:layout_marginEnd="15dp"
-                app:maxImageSize="30dp"
                 android:layout_marginBottom="30dp"
+                android:src="@drawable/baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:maxImageSize="30dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

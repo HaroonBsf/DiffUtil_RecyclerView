@@ -1,4 +1,4 @@
-package com.example.diffutilsrecyclerview
+package com.example.diffutilsrecyclerview.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

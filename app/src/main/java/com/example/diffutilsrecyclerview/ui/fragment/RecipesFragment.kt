@@ -9,12 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.data.models.localDataModels.recipes
-import com.example.diffutilsrecyclerview.data.models.localDataModels.users
+import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Recipe
 import com.example.diffutilsrecyclerview.databinding.FragmentRecipesBinding
 import com.example.diffutilsrecyclerview.ui.adapters.RecipesAdapter
 import com.example.diffutilsrecyclerview.ui.adapters.TopRecipeAdapter

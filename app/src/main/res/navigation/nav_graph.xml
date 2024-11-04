@@ -7,32 +7,59 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.diffutilsrecyclerview.HomeFragment"
+        android:name="com.example.diffutilsrecyclerview.ui.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_recipesFragment"
-            app:destination="@id/recipesFragment" />
+            android:id="@+id/action_homeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_usersFragment"
-            app:destination="@id/usersFragment" />
+            android:id="@+id/action_homeFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_exploreFragment"
-            app:destination="@id/exploreFragment" />
+            android:id="@+id/action_homeFragment_to_fullImageFragment"
+            app:destination="@id/fullImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.RecipesFragment"
         android:label="fragment_recipes"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.ExploreFragment"
         android:label="fragment_explore"
-        tools:layout="@layout/fragment_explore" />
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_exploreFragment_to_fullImageFragment"
+            app:destination="@id/fullImageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.UsersFragment"
         android:label="fragment_users"
-        tools:layout="@layout/fragment_users" />
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_usersFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.example.diffutilsrecyclerview.ui.fragment.RecipeDetailFragment"
+        android:label="fragment_recipe_detail"
+        tools:layout="@layout/fragment_recipe_detail" />
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.diffutilsrecyclerview.ui.fragment.UserDetailFragment"
+        android:label="fragment_user_detail"
+        tools:layout="@layout/fragment_user_detail" />
+    <fragment
+        android:id="@+id/fullImageFragment"
+        android:name="com.example.diffutilsrecyclerview.ui.fragment.FullImageFragment"
+        android:label="fragment_full_image"
+        tools:layout="@layout/fragment_full_image" />
 </navigation>

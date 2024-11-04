@@ -1,15 +1,17 @@
 package com.example.diffutilsrecyclerview.ui.adapters
 
-import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Recipe
 import com.example.diffutilsrecyclerview.databinding.RvRecipesItemsBinding
-import com.example.diffutilsrecyclerview.ui.RecipeDetailsActivity
 import com.example.diffutilsrecyclerview.util.recipeData
 import javax.inject.Inject
+import kotlin.reflect.KFunction1
 
 
 class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesAdapter.ViewHolder>() {
@@ -28,8 +30,7 @@ class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesAdapter
 
         holder.itemView.setOnClickListener {
             recipeData = currentItem
-            val intent = Intent(holder.itemView.context, RecipeDetailsActivity::class.java)
-            holder.itemView.context.startActivity(intent)
+            it.findNavController().navigate(R.id.action_homeFragment_to_recipeDetailFragment)
         }
     }
 

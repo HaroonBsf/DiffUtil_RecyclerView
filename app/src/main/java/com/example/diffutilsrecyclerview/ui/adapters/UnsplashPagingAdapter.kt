@@ -1,14 +1,14 @@
 package com.example.diffutilsrecyclerview.ui.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto
 import com.example.diffutilsrecyclerview.databinding.RvExploreItemBinding
-import com.example.diffutilsrecyclerview.ui.FullImage
 import com.example.diffutilsrecyclerview.util.imageUrl
 import javax.inject.Inject
 
@@ -24,12 +24,13 @@ class UnsplashPagingAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.binding.apply {
-            val context = root.context
             unsplashImage = currentItem
             executePendingBindings()
             root.setOnClickListener {
-                context.startActivity(Intent( context, FullImage::class.java))
                 imageUrl = currentItem
+                it.findNavController().navigate(
+                    R.id.action_homeFragment_to_fullImageFragment
+                )
             }
         }
     }

@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-        name="fullImage"
-        type="com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto"/>
+            name="fullImage"
+            type="com.example.diffutilsrecyclerview.data.models.remoteDataModels.UnsplashPhoto" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.FullImage"
-        android:background="@color/white">
+        android:background="@color/white"
+        tools:context=".ui.fragment.FullImageFragment">
 
         <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/photo_view"
@@ -39,4 +40,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
