@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        binding.viewPager.adapter = null
+//        binding.viewPager.adapter = null
         _binding = null
         super.onDestroyView()
     }
