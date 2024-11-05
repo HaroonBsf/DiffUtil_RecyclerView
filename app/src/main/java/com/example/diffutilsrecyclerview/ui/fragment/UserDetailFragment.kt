@@ -25,9 +25,7 @@ class UserDetailFragment : Fragment() {
 
         val data = userData
         binding.userDetails = data
-        binding.back.setOnClickListener {
-            findNavController().navigate(R.id.action_userDetailFragment_to_homeFragment)
-        }
+//        binding.back.setOnClickListener { findNavController().navigateUp() }
         binding.fbAddRecipe.setOnClickListener {
             Toast.makeText(requireContext(), "Adding Data...", Toast.LENGTH_LONG).show()
         }

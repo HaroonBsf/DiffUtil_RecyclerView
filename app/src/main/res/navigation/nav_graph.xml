@@ -24,27 +24,15 @@
         android:id="@+id/recipeDetailFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.RecipeDetailFragment"
         android:label="RecipeDetailFragment"
-        tools:layout="@layout/fragment_recipe_detail">
-        <action
-            android:id="@+id/action_recipeDetailFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_recipe_detail"/>
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.UserDetailFragment"
         android:label="UserDetailFragment"
-        tools:layout="@layout/fragment_user_detail">
-        <action
-            android:id="@+id/action_userDetailFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_user_detail"/>
     <fragment
         android:id="@+id/fullImageFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.FullImageFragment"
         android:label="FullImageFragment"
-        tools:layout="@layout/fragment_full_image" >
-        <action
-            android:id="@+id/action_fullImageFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_full_image" />
 </navigation>

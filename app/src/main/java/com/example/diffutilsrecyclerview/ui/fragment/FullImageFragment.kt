@@ -23,7 +23,7 @@ class FullImageFragment : Fragment() {
         val image = imageUrl
         binding.apply {
             fullImage = image
-            back.setOnClickListener { findNavController().navigate(R.id.action_fullImageFragment_to_homeFragment) }
+//            back.setOnClickListener { findNavController().navigate(R.id.action_fullImageFragment_to_homeFragment) }
         }
 
         return binding.root

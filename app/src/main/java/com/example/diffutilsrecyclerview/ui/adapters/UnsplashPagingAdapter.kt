@@ -12,12 +12,10 @@ import com.example.diffutilsrecyclerview.databinding.RvExploreItemBinding
 import com.example.diffutilsrecyclerview.util.imageUrl
 import javax.inject.Inject
 
-class UnsplashPagingAdapter @Inject constructor() :
-    PagingDataAdapter<UnsplashPhoto, UnsplashPagingAdapter.ViewHolder>(COMPARATOR) {
+class UnsplashPagingAdapter @Inject constructor() : PagingDataAdapter<UnsplashPhoto, UnsplashPagingAdapter.ViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            RvExploreItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RvExploreItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -28,9 +26,7 @@ class UnsplashPagingAdapter @Inject constructor() :
             executePendingBindings()
             root.setOnClickListener {
                 imageUrl = currentItem
-                it.findNavController().navigate(
-                    R.id.action_homeFragment_to_fullImageFragment
-                )
+                it.findNavController().navigate(R.id.action_homeFragment_to_fullImageFragment)
             }
         }
     }
@@ -39,12 +35,8 @@ class UnsplashPagingAdapter @Inject constructor() :
 
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<UnsplashPhoto>() {
-            override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto) =
-                oldItem.id == newItem.id
-
-            override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto) =
-                oldItem == newItem
-
+            override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto) = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto) = oldItem == newItem
         }
     }
 }

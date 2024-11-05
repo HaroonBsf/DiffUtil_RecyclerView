@@ -16,6 +16,23 @@ import javax.inject.Inject
 
 @ExperimentalPagingApi
 @HiltViewModel
+class UnsplashViewModel @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
+
+    private val _searchQuery = MutableLiveData<String>()
+
+    val unsplashImages = dataRepository.fetchUnsplashData().cachedIn(viewModelScope)
+
+    val searchResults: LiveData<PagingData<UnsplashPhoto>> = _searchQuery.switchMap { query ->
+        dataRepository.fetchUnsplashSearchImages(API_KEY_UNSPLASH, query).cachedIn(viewModelScope)
+    }
+
+    fun searchUnsplashImages(query: String) {
+        _searchQuery.value = query
+    }
+}
+
+/*
+@HiltViewModel
 class UnsplashViewModel @Inject constructor(val dataRepository: DataRepository) : ViewModel() {
 
     private val API_KEY = API_KEY_UNSPLASH
@@ -30,4 +47,4 @@ class UnsplashViewModel @Inject constructor(val dataRepository: DataRepository) 
         return dataRepository.fetchUnsplashData().cachedIn(viewModelScope)
     }
 
-}
+}*/

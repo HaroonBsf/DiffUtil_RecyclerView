@@ -1,6 +1,7 @@
 package com.example.diffutilsrecyclerview.ui.fragment
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,8 @@ class ExploreFragment : Fragment() {
     @Inject lateinit var adapter: UnsplashPagingAdapter
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
+
+    private var scrollPosition: Parcelable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
@@ -53,7 +56,6 @@ class ExploreFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
                     viewModel.searchUnsplashImages("")
-                    adapter.refresh()
                 }
                 return false
             }
@@ -61,10 +63,9 @@ class ExploreFragment : Fragment() {
     }
 
     private fun observeUnsplashImages() {
-        binding.shimmerLayoutUnsplash.visibility = View.VISIBLE
         binding.shimmerLayoutUnsplash.startShimmer()
-        viewModel.getUnsplashImages().observe(viewLifecycleOwner, Observer { pagingData ->
-            adapter.submitData(lifecycle, pagingData)
+        viewModel.unsplashImages.observe(viewLifecycleOwner, Observer { pagingData ->
+            adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
             binding.rvExploreImages.visibility = View.VISIBLE
             binding.shimmerLayoutUnsplash.stopShimmer()
             binding.shimmerLayoutUnsplash.visibility = View.GONE
@@ -73,7 +74,7 @@ class ExploreFragment : Fragment() {
 
     private fun observeUnsplashSearchImages() {
         viewModel.searchResults.observe(viewLifecycleOwner, Observer { pagingData ->
-            adapter.submitData(lifecycle, pagingData)
+            adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
         })
     }
 
@@ -83,10 +84,13 @@ class ExploreFragment : Fragment() {
         binding.rvExploreImages.setHasFixedSize(true)
         binding.rvExploreImages.itemAnimator = null
         binding.rvExploreImages.adapter = adapter.withLoadStateFooter(loaderAdapter)
+
+        binding.rvExploreImages.layoutManager?.onRestoreInstanceState(scrollPosition)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        scrollPosition = binding.rvExploreImages.layoutManager?.onSaveInstanceState()
         _binding = null
     }
 }

@@ -49,7 +49,7 @@ class RecipeDetailFragment : Fragment() {
                 adapter = ingredientsAdapter }
             rvInstructions.apply { layoutManager = LinearLayoutManager(context)
                 adapter = instructionsAdapter }
-            ivBack.setOnClickListener { findNavController().navigate(R.id.action_recipeDetailFragment_to_homeFragment) }
+//            ivBack.setOnClickListener { findNavController().navigateUp() }
         }
     }
 
