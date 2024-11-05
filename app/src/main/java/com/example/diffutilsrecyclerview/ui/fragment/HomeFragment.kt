@@ -10,7 +10,6 @@ import com.example.diffutilsrecyclerview.databinding.FragmentHomeBinding
 import com.example.diffutilsrecyclerview.ui.adapters.PagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 @ExperimentalPagingApi
@@ -19,15 +18,19 @@ class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
     lateinit var adapter: PagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = PagerAdapter(this)
         binding.viewPager.adapter = adapter
         tabLayoutMediator()
-        return binding.root
+
     }
 
     private fun tabLayoutMediator() {
@@ -35,14 +38,14 @@ class HomeFragment : Fragment() {
             tab.text = when (position) {
                 0 -> "Recipes"
                 1 -> "Users"
-                2 -> "Explore"
-                else -> null
+                else -> "Explore"
             }
         }.attach()
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        binding.viewPager.adapter = null
         _binding = null
+        super.onDestroyView()
     }
 }

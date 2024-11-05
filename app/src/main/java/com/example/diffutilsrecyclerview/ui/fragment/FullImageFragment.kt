@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.databinding.FragmentFullImageBinding
 import com.example.diffutilsrecyclerview.util.imageUrl
 
@@ -21,7 +23,7 @@ class FullImageFragment : Fragment() {
         val image = imageUrl
         binding.apply {
             fullImage = image
-//            back.setOnClickListener { finish() }
+            back.setOnClickListener { findNavController().navigate(R.id.action_fullImageFragment_to_homeFragment) }
         }
 
         return binding.root

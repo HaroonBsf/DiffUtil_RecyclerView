@@ -13,11 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.data.models.localDataModels.recipes
-import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Recipe
 import com.example.diffutilsrecyclerview.databinding.FragmentRecipesBinding
-import com.example.diffutilsrecyclerview.ui.adapters.RecipesAdapter
+import com.example.diffutilsrecyclerview.ui.adapters.RecipeAdapter
 import com.example.diffutilsrecyclerview.ui.adapters.TopRecipeAdapter
 import com.example.diffutilsrecyclerview.ui.viewmodels.RecipeViewModel
 import com.example.diffutilsrecyclerview.ui.viewmodels.TopRecipeViewModel
@@ -29,8 +27,7 @@ import javax.inject.Inject
 @ExperimentalPagingApi
 class RecipesFragment : Fragment() {
 
-    @Inject
-    lateinit var adapter: RecipesAdapter
+    @Inject lateinit var adapter: RecipeAdapter
     @Inject
     lateinit var topAdapter: TopRecipeAdapter
     private val viewModel: RecipeViewModel by viewModels()
@@ -68,14 +65,14 @@ class RecipesFragment : Fragment() {
         val filteredRecipes = viewModel.recipeData.value?.recipes?.filter {
             it.name.contains(query, ignoreCase = true)
         } ?: emptyList()
-        adapter.updateRecipes(filteredRecipes)
+        adapter.updateUsers(filteredRecipes)
     }
 
     private fun observeRemoteRecipes() {
         observeTopRecipes()
         viewModel.recipeData.observe(viewLifecycleOwner, Observer { response ->
             if (response != null) {
-                adapter.updateRecipes(response.recipes)
+                adapter.updateUsers(response.recipes)
             } else {
                 observeLocalRecipes()
             }
@@ -106,7 +103,7 @@ class RecipesFragment : Fragment() {
     private fun observeLocalRecipes() {
         viewModel.localRecipesData.observe(viewLifecycleOwner, Observer { localRecipes ->
             localRecipes?.let {
-                adapter.updateRecipes(it.recipes())
+                adapter.updateUsers(it.recipes())
             }
         })
     }

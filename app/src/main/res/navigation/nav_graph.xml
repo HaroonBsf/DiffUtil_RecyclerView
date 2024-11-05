@@ -21,45 +21,30 @@
             app:destination="@id/fullImageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/recipesFragment"
-        android:name="com.example.diffutilsrecyclerview.ui.fragment.RecipesFragment"
-        android:label="fragment_recipes"
-        tools:layout="@layout/fragment_recipes" >
-        <action
-            android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/exploreFragment"
-        android:name="com.example.diffutilsrecyclerview.ui.fragment.ExploreFragment"
-        android:label="fragment_explore"
-        tools:layout="@layout/fragment_explore" >
-        <action
-            android:id="@+id/action_exploreFragment_to_fullImageFragment"
-            app:destination="@id/fullImageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/usersFragment"
-        android:name="com.example.diffutilsrecyclerview.ui.fragment.UsersFragment"
-        android:label="fragment_users"
-        tools:layout="@layout/fragment_users" >
-        <action
-            android:id="@+id/action_usersFragment_to_userDetailFragment"
-            app:destination="@id/userDetailFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.RecipeDetailFragment"
-        android:label="fragment_recipe_detail"
-        tools:layout="@layout/fragment_recipe_detail" />
+        android:label="RecipeDetailFragment"
+        tools:layout="@layout/fragment_recipe_detail">
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.UserDetailFragment"
-        android:label="fragment_user_detail"
-        tools:layout="@layout/fragment_user_detail" />
+        android:label="UserDetailFragment"
+        tools:layout="@layout/fragment_user_detail">
+        <action
+            android:id="@+id/action_userDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fullImageFragment"
         android:name="com.example.diffutilsrecyclerview.ui.fragment.FullImageFragment"
-        android:label="fragment_full_image"
-        tools:layout="@layout/fragment_full_image" />
+        android:label="FullImageFragment"
+        tools:layout="@layout/fragment_full_image" >
+        <action
+            android:id="@+id/action_fullImageFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

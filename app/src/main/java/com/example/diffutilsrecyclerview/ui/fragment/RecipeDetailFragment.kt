@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.diffutilsrecyclerview.R
 import com.example.diffutilsrecyclerview.databinding.FragmentRecipeDetailBinding
 import com.example.diffutilsrecyclerview.ui.adapters.IngredientsAdapter
 import com.example.diffutilsrecyclerview.ui.adapters.InstructionsAdapter
@@ -47,7 +49,7 @@ class RecipeDetailFragment : Fragment() {
                 adapter = ingredientsAdapter }
             rvInstructions.apply { layoutManager = LinearLayoutManager(context)
                 adapter = instructionsAdapter }
-//            ivBack.setOnClickListener { finish() }
+            ivBack.setOnClickListener { findNavController().navigate(R.id.action_recipeDetailFragment_to_homeFragment) }
         }
     }
 

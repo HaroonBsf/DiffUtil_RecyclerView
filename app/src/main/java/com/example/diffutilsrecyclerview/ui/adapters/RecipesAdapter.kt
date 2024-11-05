@@ -1,6 +1,5 @@
 package com.example.diffutilsrecyclerview.ui.adapters
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -11,10 +10,8 @@ import com.example.diffutilsrecyclerview.data.models.remoteDataModels.Recipe
 import com.example.diffutilsrecyclerview.databinding.RvRecipesItemsBinding
 import com.example.diffutilsrecyclerview.util.recipeData
 import javax.inject.Inject
-import kotlin.reflect.KFunction1
 
-
-class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesAdapter.ViewHolder>() {
+class RecipeAdapter @Inject constructor() : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
     private var recipeList = listOf<Recipe>()
 
@@ -40,18 +37,16 @@ class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesAdapter
 
     class ViewHolder(val binding: RvRecipesItemsBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun updateRecipes(newUserList: List<Recipe>) {
-        val finalList = newUserList ?: emptyList()
-        val diffCallback = RecipesDiffCallback(recipeList, newUserList)
+    fun updateUsers(newUserList: List<Recipe>) {
+        val diffCallback = RecipeDiffCallback(recipeList, newUserList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        recipeList = finalList
+        recipeList = newUserList
         diffResult.dispatchUpdatesTo(this)
     }
 }
 
-class RecipesDiffCallback(private val oldList: List<Recipe>, private val newList: List<Recipe>): DiffUtil.Callback() {
+class RecipeDiffCallback(private val oldList: List<Recipe>, private val newList: List<Recipe>): DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
-
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

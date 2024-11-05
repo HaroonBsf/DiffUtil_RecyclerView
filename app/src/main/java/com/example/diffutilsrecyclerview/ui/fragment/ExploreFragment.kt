@@ -61,6 +61,7 @@ class ExploreFragment : Fragment() {
     }
 
     private fun observeUnsplashImages() {
+        binding.shimmerLayoutUnsplash.visibility = View.VISIBLE
         binding.shimmerLayoutUnsplash.startShimmer()
         viewModel.getUnsplashImages().observe(viewLifecycleOwner, Observer { pagingData ->
             adapter.submitData(lifecycle, pagingData)
