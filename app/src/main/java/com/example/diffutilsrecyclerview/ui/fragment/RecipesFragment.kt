@@ -47,7 +47,7 @@ class RecipesFragment : Fragment() {
         filterRecipes()
         recyclerViewSetup()
         observeRemoteRecipes()
-        topViewModel.getTopRecipeData()
+//        topViewModel.getTopRecipeData()
         viewModel.getRecipeData()
     }
 
@@ -69,7 +69,7 @@ class RecipesFragment : Fragment() {
     }
 
     private fun observeRemoteRecipes() {
-        observeTopRecipes()
+//        observeTopRecipes()
         viewModel.recipeData.observe(viewLifecycleOwner, Observer { response ->
             if (response != null) {
                 adapter.updateUsers(response.recipes)

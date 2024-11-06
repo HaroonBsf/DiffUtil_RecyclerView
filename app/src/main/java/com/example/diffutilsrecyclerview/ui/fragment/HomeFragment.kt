@@ -30,7 +30,6 @@ class HomeFragment : Fragment() {
         adapter = PagerAdapter(this)
         binding.viewPager.adapter = adapter
         tabLayoutMediator()
-
     }
 
     private fun tabLayoutMediator() {
